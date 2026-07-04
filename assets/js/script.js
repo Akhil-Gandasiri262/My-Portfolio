@@ -136,7 +136,29 @@ for (let i = 0; i < formInputs.length; i++) {
 
 
 
-// page navigation variables
+// org logo navigation to resume experience
+document.querySelectorAll("[data-org-link]").forEach(function (link) {
+  link.addEventListener("click", function (e) {
+    e.preventDefault();
+    const targetId = this.dataset.orgLink;
+
+    // activate Resume nav
+    document.querySelectorAll("[data-nav-link]").forEach(function (nav) {
+      nav.classList.toggle("active", nav.innerHTML.toLowerCase() === "resume");
+    });
+    document.querySelectorAll("[data-page]").forEach(function (page) {
+      page.classList.toggle("active", page.dataset.page === "resume");
+    });
+
+    // scroll to the experience item
+    setTimeout(function () {
+      const target = document.getElementById(targetId);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 100);
+  });
+});
+
+
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
